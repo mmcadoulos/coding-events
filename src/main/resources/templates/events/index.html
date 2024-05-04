@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>All Events</h1>
+<nav th:replace="fragments :: navBar"></nav>
 <p th:unless="${events} and ${events.size()}">No events to display! Add an event through this <a href="events/create">form</a></p>
 <ul>
 <!--    <th:block>-->
