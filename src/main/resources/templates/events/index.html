@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
-    <meta charset="UTF-8"/>
-    <title>Coding Events</title>
-</head>
-<body>
+<head th:replace="~{fragments :: head}"></head>
+<body class="container">
 <h1>All Events</h1>
-<nav th:replace="fragments :: navBar"></nav>
-<p th:unless="${events} and ${events.size()}">No events to display! Add an event through this <a href="events/create">form</a></p>
-<ul>
-<!--    <th:block>-->
-<!--        <li th:each="event : ${events}" th:text="${event}">Event name</li>-->
-<!--    </th:block>-->
-    <th:block th:each="event : ${events}">
-        <li th:text="${event}">Event name</li>
-    </th:block>
-</ul>
+<nav th:replace="~{fragments :: navBar}"></nav>
+<table class="table table-striped">
+    <thead>
+    <tr th:unless="${events} and ${events.size()}">
+        <th>No events to display! Add an event through this <a href="events/create">form</a></th>
+    </tr>
+    <tr th:if="${events} and ${events.size()}">
+        <th>Name</th>
+    </tr>
+    </thead>
+
+    <tr th:each="event : ${events}">
+        <td th:unless="${event.isEmpty()}" th:text="${event}">Event name</td>
+    </tr>
+</table>
 </body>
 </html>
