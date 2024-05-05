@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
-    private static HashMap<Event, String> events = new HashMap<>();
+    private static ArrayList<Event> events = new ArrayList<>();
 
     @GetMapping()
     public String getEvent(Model model) {
@@ -25,12 +25,12 @@ public class EventController {
 //        events.add("Event 2");
 //        events.add("Event 3");
 //        events.add("Event 4");
-        Event event1 = new Event("Nap-Time");
-        Event event2 = new Event("Coffee and Code");
-        Event event3 = new Event("Bar-Be-Code");
-        events.put(event1, "You get to take a nap guilt-free!");
-        events.put(event2, "Code with some people and drink nasty beverages");
-        events.put(event3, "Code with fingers stained with delicious bbq");
+//        Event event1 = new Event("Nap-Time", "You get to take a nap guilt-free!");
+//        Event event2 = new Event("Coffee and Code", "Code with some people and drink nasty beverages");
+//        Event event3 = new Event("Bar-Be-Code", "Code with fingers stained with delicious bbq");
+//        events.add(event1);
+//        events.add(event2);
+//        events.add(event3);
 
         model.addAttribute("events", events);
 
@@ -45,7 +45,14 @@ public class EventController {
 
     @PostMapping("create")
     public String createEvent(@RequestParam String eventName, @RequestParam String eventInfo) {
-        events.put(new Event(eventName), eventInfo);
+
+        if (eventName.isBlank()) {
+            return "redirect:/events";
+        } else if (eventInfo.isBlank()) {
+            events.add(new Event(eventName));
+        } else {
+            events.add(new Event(eventName, eventInfo));
+        }
         return "redirect:/events";
     }
 }

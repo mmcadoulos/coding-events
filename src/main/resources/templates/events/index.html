@@ -16,12 +16,13 @@
     </tr>
     </thead>
 
-    <tr th:each="event : ${events.entrySet}">
-        <td th:text="${event.key.name}">Event name</td>
-        <td th:text="${event.value}">Event description</td>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.name}">Event name</td>
+        <td th:text="${event.info}">Event description</td>
         <td th:replace="~{fragments :: address}"></td>
-<!--        <td><img th:src="@{/pictures/class-memes.png}" class="img-fluid" alt="Memes from class"></td>-->
-        <td><img th:src="@{/pictures/toad.jpeg}" style="max-height:200px" alt="Memes from class"></td>
+        <!--        <td><img th:src="@{/pictures/class-memes.png}" class="img-fluid" alt="Memes from class"></td>-->
+        <!--        <td><img th:src="@{/pictures/toad.jpeg}" style="max-height:200px" alt="Memes from class"></td>-->
+        <td th:replace="~{fragments :: eventPic}"></td>
     </tr>
 </table>
 </body>
