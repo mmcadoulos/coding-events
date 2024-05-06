@@ -23,6 +23,6 @@ public class EventData {
     }
 
     public static void removeEvent(int id) {
-        events.remove(id);
+        if (events.containsKey(id)){events.remove(id);}
     }
 }
