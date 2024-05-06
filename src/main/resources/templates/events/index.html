@@ -10,6 +10,7 @@
         <th>No events to display! Add an event through this <a href="events/create">form</a></th>
     </tr>
     <tr th:if="${events} and ${events.size()}">
+        <th>Event ID</th>
         <th>Name</th>
         <th>Description</th>
         <th>Location</th>
@@ -17,6 +18,7 @@
     </thead>
 
     <tr th:each="event : ${events}">
+        <td th:text="${event.id}">Event ID</td>
         <td th:text="${event.name}">Event name</td>
         <td th:text="${event.info}">Event description</td>
         <td th:replace="~{fragments :: address}"></td>
