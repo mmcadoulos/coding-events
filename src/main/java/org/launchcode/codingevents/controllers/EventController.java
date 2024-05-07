@@ -9,13 +9,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 @Controller
 @RequestMapping("events")
 public class EventController {
 
     @GetMapping()
-    public String getEvent(Model model) {
+    public String displayAllEvents(Model model) {
         model.addAttribute("title", "All Events");
         model.addAttribute("events", EventData.getAll());
         return "events/index";
@@ -28,13 +31,30 @@ public class EventController {
     }
 
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName, @RequestParam String eventInfo) {
+    public String processCreateEventForm(@RequestParam String eventName, @RequestParam String eventInfo) {
         if (eventName.isBlank()) {
             return "redirect:/events";
         } else if (eventInfo.isBlank()) {
             EventData.addEvent(new Event(eventName));
         } else {
             EventData.addEvent(new Event(eventName, eventInfo));
+        }
+        return "redirect:/events";
+    }
+
+    @GetMapping("delete")
+    public String displayDeleteEventForm(Model model) {
+        model.addAttribute("title", "Delete Events");
+        model.addAttribute("events", EventData.getAll());
+        return "events/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteEventForm(@RequestParam(required = false) Collection<Integer> eventIds) { // could use int[] or ArrayList<Integer>
+        if (eventIds != null) {
+            for (Integer id : eventIds) {
+                EventData.removeEvent(id);
+            }
         }
         return "redirect:/events";
     }
