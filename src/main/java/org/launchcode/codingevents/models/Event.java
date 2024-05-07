@@ -10,16 +10,6 @@ public class Event {
     private String name;
     private String info;
 
-//    public Event(String name) {
-//        this.name = name;
-//        this.id = nextId;
-//        nextId++;
-//    }
-//
-//    public Event(String name, String info) {
-//        this(name);
-//        this.info = info;
-//    }
 
     public Event(String name, String info) {
         this.name = name;

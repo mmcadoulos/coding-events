@@ -23,7 +23,10 @@
         <td th:replace="~{fragments :: address}"></td>
         <!--        <td><img th:src="@{/pictures/class-memes.png}" class="img-fluid" alt="Memes from class"></td>-->
         <!--        <td><img th:src="@{/pictures/toad.jpeg}" style="max-height:200px" alt="Memes from class"></td>-->
-        <td th:replace="~{fragments :: eventPic}"></td>
+<!--        <td th:replace="~{fragments :: eventPic}"></td>-->
+        <td>
+            <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
+        </td>
     </tr>
 </table>
 </body>

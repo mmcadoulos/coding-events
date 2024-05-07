@@ -6,10 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-
 @Controller
 @RequestMapping("events")
 public class EventController {
@@ -31,11 +27,6 @@ public class EventController {
     public String processCreateEventForm(@ModelAttribute Event newEvent) {
         if (newEvent.getName().isBlank()) {
             return "redirect:/events";
-//        } else if (newEvent.getInfo().isBlank()) {
-//            EventData.addEvent(new Event(newEvent.getName()));
-//        } else {
-//            EventData.addEvent(new Event(newEvent.getName(), newEvent.getInfo()));
-//        }
         }
         EventData.addEvent(newEvent);
         return "redirect:/events";
@@ -55,6 +46,23 @@ public class EventController {
                 EventData.removeEvent(id);
             }
         }
+        return "redirect:/events";
+    }
+
+    @GetMapping("edit/{eventId}")
+    public String displayEditForm(Model model, @PathVariable int eventId) {
+        Event eventToEdit = EventData.getById(eventId);
+        model.addAttribute("event", eventToEdit);
+        String title = "Edit Event: " + eventToEdit.getName() + " (id=" + eventToEdit.getId() + ")";
+        model.addAttribute("title", title);
+    return "events/edit";
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(int eventId, String name, String info) {
+        Event eventToEdit = EventData.getById(eventId);
+        if (!eventToEdit.getName().equals(name) && !name.isBlank()){eventToEdit.setName(name);}
+        if (!eventToEdit.getInfo().equals(info) && !info.isBlank()){eventToEdit.setInfo(info);}
         return "redirect:/events";
     }
 }
