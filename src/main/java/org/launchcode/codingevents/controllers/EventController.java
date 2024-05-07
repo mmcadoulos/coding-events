@@ -4,10 +4,7 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,14 +28,16 @@ public class EventController {
     }
 
     @PostMapping("create")
-    public String processCreateEventForm(@RequestParam String eventName, @RequestParam String eventInfo) {
-        if (eventName.isBlank()) {
+    public String processCreateEventForm(@ModelAttribute Event newEvent) {
+        if (newEvent.getName().isBlank()) {
             return "redirect:/events";
-        } else if (eventInfo.isBlank()) {
-            EventData.addEvent(new Event(eventName));
-        } else {
-            EventData.addEvent(new Event(eventName, eventInfo));
+//        } else if (newEvent.getInfo().isBlank()) {
+//            EventData.addEvent(new Event(newEvent.getName()));
+//        } else {
+//            EventData.addEvent(new Event(newEvent.getName(), newEvent.getInfo()));
+//        }
         }
+        EventData.addEvent(newEvent);
         return "redirect:/events";
     }
 
@@ -50,9 +49,9 @@ public class EventController {
     }
 
     @PostMapping("delete")
-    public String processDeleteEventForm(@RequestParam(required = false) Collection<Integer> eventIds) { // could use int[] or ArrayList<Integer>
+    public String processDeleteEventForm(@RequestParam(required = false) int[] eventIds) { // could use int[] or ArrayList<Integer> or Collection<Integer>
         if (eventIds != null) {
-            for (Integer id : eventIds) {
+            for (int id : eventIds) {
                 EventData.removeEvent(id);
             }
         }
