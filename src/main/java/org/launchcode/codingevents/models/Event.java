@@ -11,13 +11,14 @@ public class Event {
     private final int id;
     private static int nextId = 1;
 
-    @NotBlank
+    @NotBlank(message = "")
     @Size(min = 3, max = 25, message = "Name must be between 3 and 25 characters long")
     private String name;
 
     @Size(max = 500, message = "Character limit of 500 characters")
     private String info;
 
+    @NotBlank(message = "Please enter a valid email address")
     @Email(message = "Please enter a valid email address")
     private String email;
 

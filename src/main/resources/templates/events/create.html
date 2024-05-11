@@ -3,11 +3,16 @@
 <head th:replace="~{fragments :: head}"></head>
 <body class="container">
 <nav th:replace="~{fragments :: navBar}"></nav>
-<form method="post" action="/events/create">
 
+<p th:text="${errorMsg}" style="color:red;"></p>
+<th:block th:each="error: ${errors}">
+    <p th:text="${error.defaultMessage}" style="color:red;"></p>
+</th:block>
+
+<form method="post" action="/events/create">
     <div class="form-group">
         <label>Event Name
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control">
         </label>
     </div>
     <div class="form-group">
