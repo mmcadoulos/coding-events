@@ -13,6 +13,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>Location</th>
+        <th>Contact Email</th>
         <th></th>
         <th></th>
     </tr>
@@ -23,6 +24,7 @@
         <td th:text="${event.name}">Event name</td>
         <td th:text="${event.info}">Event description</td>
         <td th:replace="~{fragments :: address}"></td>
+        <td th:text="${event.email}">Contact email</td>
         <!--        <td><img th:src="@{/pictures/class-memes.png}" class="img-fluid" alt="Memes from class"></td>-->
         <!--        <td><img th:src="@{/pictures/toad.jpeg}" style="max-height:200px" alt="Memes from class"></td>-->
 <!--        <td th:replace="~{fragments :: eventPic}"></td>-->

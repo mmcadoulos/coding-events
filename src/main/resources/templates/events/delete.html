@@ -6,7 +6,7 @@
 
 <h3 th:unless="${events} and ${events.size()}">No events to delete!</h3>
 
-<form th:if="${events} and ${events.size()}" method="post">>
+<form th:if="${events} and ${events.size()}" method="post">
     <th:block th:each="event : ${events}">
         <div class="form-check">
             <label>
