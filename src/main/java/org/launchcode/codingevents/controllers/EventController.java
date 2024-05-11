@@ -21,6 +21,7 @@ public class EventController {
 
     @GetMapping("create")
     public String renderCreateEventForm(Model model) {
+        model.addAttribute(new Event());
         model.addAttribute("title", "Create Event");
         return "events/create";
     }
@@ -31,12 +32,11 @@ public class EventController {
                                          Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
-            model.addAttribute("errorMsg", "Bad data!!");
-            model.addAttribute("errors", errors.getAllErrors());
             return "events/create";
+        } else {
+            EventData.addEvent(newEvent);
+            return "redirect:/events";
         }
-        EventData.addEvent(newEvent);
-        return "redirect:/events";
     }
 
     @GetMapping("delete")
@@ -80,7 +80,7 @@ public class EventController {
         if (!eventToEdit.getInfo().equals(info) && !info.isBlank()) {
             eventToEdit.setInfo(info);
         }
-        if (!email.isBlank()){
+        if (!email.isBlank()) {
             eventToEdit.setEmail(email);
         }
         return "redirect:/events";

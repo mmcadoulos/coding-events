@@ -2,7 +2,16 @@ h1 {
 color:indigo;
 }
 
+h3 {
+color:indigo;
+}
+
 body {
-font-size: 18px;
+font-size: default;
 color: purple;
+}
+
+.error {
+color:maroon;
+
 }
