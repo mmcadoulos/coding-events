@@ -13,6 +13,8 @@
         <th>Name</th>
         <th>Description</th>
         <th>Location</th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
 
@@ -25,7 +27,16 @@
         <!--        <td><img th:src="@{/pictures/toad.jpeg}" style="max-height:200px" alt="Memes from class"></td>-->
 <!--        <td th:replace="~{fragments :: eventPic}"></td>-->
         <td>
-            <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
+            <form method="get" th:action="@{/events/edit/{id}(id=${event.id})}">
+                <input type="hidden" th:value="${event.id}" name="eventId">
+                <input type="submit" value="Edit" class="btn btn-info">
+            </form>
+        </td>
+        <td>
+            <form method="post" th:action="@{/events/deleteEvent}">
+                <input type="hidden" th:value="${event.id}" name="eventId">
+                <input type="submit" value="Delete" class="btn btn-danger">
+            </form>
         </td>
     </tr>
 </table>

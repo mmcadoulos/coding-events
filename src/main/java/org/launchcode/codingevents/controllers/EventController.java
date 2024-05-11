@@ -49,20 +49,30 @@ public class EventController {
         return "redirect:/events";
     }
 
+    @PostMapping("deleteEvent")
+    public String processDeleteEventButton(@RequestParam int eventId) { // could use int[] or ArrayList<Integer> or Collection<Integer>
+        EventData.removeEvent(eventId);
+        return "redirect:/events";
+    }
+
     @GetMapping("edit/{eventId}")
     public String displayEditForm(Model model, @PathVariable int eventId) {
         Event eventToEdit = EventData.getById(eventId);
         model.addAttribute("event", eventToEdit);
         String title = "Edit Event: " + eventToEdit.getName() + " (id=" + eventToEdit.getId() + ")";
         model.addAttribute("title", title);
-    return "events/edit";
+        return "events/edit";
     }
 
     @PostMapping("edit")
     public String processEditForm(int eventId, String name, String info) {
         Event eventToEdit = EventData.getById(eventId);
-        if (!eventToEdit.getName().equals(name) && !name.isBlank()){eventToEdit.setName(name);}
-        if (!eventToEdit.getInfo().equals(info) && !info.isBlank()){eventToEdit.setInfo(info);}
+        if (!eventToEdit.getName().equals(name) && !name.isBlank()) {
+            eventToEdit.setName(name);
+        }
+        if (!eventToEdit.getInfo().equals(info) && !info.isBlank()) {
+            eventToEdit.setInfo(info);
+        }
         return "redirect:/events";
     }
 }
