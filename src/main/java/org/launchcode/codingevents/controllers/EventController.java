@@ -1,6 +1,7 @@
 package org.launchcode.codingevents.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.codingevents.data.DeletedData;
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class EventController {
     public String displayAllEvents(Model model) {
         model.addAttribute("title", "All Events");
         model.addAttribute("events", EventData.getAll());
+        model.addAttribute("deletedEvents", DeletedData.getAll());
         return "events/index";
     }
 
@@ -50,6 +52,7 @@ public class EventController {
     public String processDeleteEventForm(@RequestParam(required = false) int[] eventIds) { // could use int[] or ArrayList<Integer> or Collection<Integer>
         if (eventIds != null) {
             for (int id : eventIds) {
+                DeletedData.addEvent(EventData.getById(id));
                 EventData.removeEvent(id);
             }
         }
@@ -57,7 +60,8 @@ public class EventController {
     }
 
     @PostMapping("deleteEvent")
-    public String processDeleteEventButton(@RequestParam int eventId) { // could use int[] or ArrayList<Integer> or Collection<Integer>
+    public String processDeleteEventButton(@RequestParam int eventId) {
+        DeletedData.addEvent(EventData.getById(eventId));
         EventData.removeEvent(eventId);
         return "redirect:/events";
     }
@@ -84,5 +88,19 @@ public class EventController {
             eventToEdit.setEmail(email);
         }
         return "redirect:/events";
+    }
+
+    @GetMapping("restore")
+    public String displayRestoreForm(Model model) {
+        model.addAttribute("title", "Deleted Events");
+        model.addAttribute("events", DeletedData.getAll());
+        return "events/restore";
+    }
+
+    @PostMapping("restore")
+    public String processRestoreEvent(@RequestParam int eventId){
+        EventData.addEvent(DeletedData.getById(eventId));
+        DeletedData.removeEvent(eventId);
+        return "redirect:/events/restore";
     }
 }

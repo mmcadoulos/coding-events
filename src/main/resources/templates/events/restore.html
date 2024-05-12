@@ -3,16 +3,16 @@
 <head th:replace="~{fragments :: head}"></head>
 <body class="container">
 <nav th:replace="~{fragments :: navBar}"></nav>
+
+<!--<h1 style="color:black;">In Progress</h1>-->
+
 <table class="table table-striped">
     <thead>
     <tr th:unless="${events} and ${events.size()}">
-        <th>No events to display! Add an event through this <a href="events/create">form</a></th>
-    </tr>
-    <tr th:if="${deletedEvents} and ${deletedEvents.size()}">
-        <th th:text="${deletedEvents.size() + ' Deleted events may be restored'}"></th>
+        <th>No events have been deleted!</th>
     </tr>
     <tr th:if="${events} and ${events.size()}">
-
+        <th>Restore?</th>
         <th>Date</th>
         <th>Name</th>
         <th>Description</th>
@@ -20,14 +20,18 @@
         <th>Contact Email</th>
         <th>Registration Required</th>
         <th>Number of Attendees</th>
-        <th></th>
-        <th></th>
         <th>Color for Outfits</th>
         <th>Event ID</th>
     </tr>
     </thead>
 
     <tr th:each="event : ${events}">
+        <td>
+            <form method="post" th:action="@{/events/restore}">
+                <input type="hidden" th:value="${event.id}" name="eventId">
+                <input type="submit" value="Restore" class="btn btn-success">
+            </form>
+        </td>
         <td th:text="${event.date}">Event Date</td>
         <td th:text="${event.name}">Event name</td>
         <td th:text="${event.info}">Event description</td>
@@ -35,18 +39,6 @@
         <td th:text="${event.email}">Contact email</td>
         <td th:text="${event.mustRegister}">Must Register</td>
         <td th:text="${event.numOfAttendees}">Number of Attendees</td>
-        <td>
-            <form method="get" th:action="@{/events/edit/{id}(id=${event.id})}">
-                <input type="hidden" th:value="${event.id}" name="eventId">
-                <input type="submit" value="Edit" class="btn btn-info">
-            </form>
-        </td>
-        <td>
-            <form method="post" th:action="@{/events/deleteEvent}">
-                <input type="hidden" th:value="${event.id}" name="eventId">
-                <input type="submit" value="Delete" class="btn btn-danger">
-            </form>
-        </td>
         <td th:style="${'background-color: ' + event.color + ';'}"></td>
         <td th:text="${event.id}">Event ID</td>
     </tr>
