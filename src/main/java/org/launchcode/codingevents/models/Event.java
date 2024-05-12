@@ -17,8 +17,8 @@ public class Event {
     @Size(max = 500, message = "Character limit of 500 characters")
     private String info;
 
-    @NotBlank(message = "Location required")
-    @NotNull(message = "Location required")
+    @NotBlank(message = "Location is required")
+    @NotNull(message = "Location is required")
     private String location;
 
     @NotBlank(message = "Email is required")
@@ -31,6 +31,7 @@ public class Event {
     @Min(value = 1, message = "Number of attendees must be more than zero")
     private int numOfAttendees;
 
+    @NotNull(message = "Date is required")
     @FutureOrPresent(message = "Date cannot be in the past")
     private LocalDate date;
 
