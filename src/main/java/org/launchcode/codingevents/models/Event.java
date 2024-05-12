@@ -1,9 +1,8 @@
 package org.launchcode.codingevents.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Event {
@@ -18,21 +17,48 @@ public class Event {
     @Size(max = 500, message = "Character limit of 500 characters")
     private String info;
 
+    @NotBlank(message = "Location required")
+    @NotNull(message = "Location required")
+    private String location;
+
     @NotBlank(message = "Email is required")
     @Email(message = "Please enter a valid email address")
     private String email;
 
+    @AssertTrue(message = "Must be 'True'")
+    private boolean mustRegister;
 
-    public Event(String name, String info, String email) {
+    @Min(value = 1, message = "Number of attendees must be more than zero")
+    private int numOfAttendees;
+
+    @FutureOrPresent(message = "Date cannot be in the past")
+    private LocalDate date;
+
+    private String color = "#8024db";
+
+    public Event(LocalDate date, String name, String info, String location, String email, boolean mustRegister, int numOfAttendees, String color) {
         this();
+        this.date = date;
         this.name = name;
         this.info = info;
+        this.location = location;
         this.email = email;
+        this.mustRegister = mustRegister;
+        this.numOfAttendees = numOfAttendees;
+        this.color = color;
     }
 
-    public Event(){
-        this.id=nextId;
+    public Event() {
+        this.id = nextId;
         nextId++;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getName() {
@@ -51,12 +77,44 @@ public class Event {
         this.info = info;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isMustRegister() {
+        return mustRegister;
+    }
+
+    public void setMustRegister(boolean mustRegister) {
+        this.mustRegister = mustRegister;
+    }
+
+    public int getNumOfAttendees() {
+        return numOfAttendees;
+    }
+
+    public void setNumOfAttendees(int numOfAttendees) {
+        this.numOfAttendees = numOfAttendees;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public int getId() {
