@@ -37,12 +37,15 @@ public class Event {
 
     private String color = "#8024db";
 
-    public Event(LocalDate date, String name, String info, String location, String email, boolean mustRegister, int numOfAttendees, String color) {
+    private EventType type;
+
+    public Event(LocalDate date, String name, String info, String location, EventType type, String email, boolean mustRegister, int numOfAttendees, String color) {
         this();
         this.date = date;
         this.name = name;
         this.info = info;
         this.location = location;
+        this.type = type;
         this.email = email;
         this.mustRegister = mustRegister;
         this.numOfAttendees = numOfAttendees;
@@ -116,6 +119,14 @@ public class Event {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     public int getId() {

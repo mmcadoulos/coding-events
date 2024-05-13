@@ -17,6 +17,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>Location</th>
+        <th>Event Type</th>
         <th>Contact Email</th>
         <th>Registration Required</th>
         <th>Number of Attendees</th>
@@ -31,6 +32,7 @@
         <td th:text="${event.date}">Event Date</td>
         <td th:text="${event.name}">Event name</td>
         <td th:text="${event.info}">Event description</td>
+        <td th:text="${event.type}">Event Type</td>
         <td th:text="${event.location}">Event location</td>
         <td th:text="${event.email}">Contact email</td>
         <td th:text="${event.mustRegister}">Must Register</td>
