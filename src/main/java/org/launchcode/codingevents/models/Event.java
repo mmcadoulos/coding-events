@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.models;
 
+import com.fasterxml.jackson.databind.annotation.EnumNaming;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
@@ -17,25 +18,26 @@ public class Event {
     @Size(max = 500, message = "Character limit of 500 characters")
     private String info;
 
-    @NotBlank(message = "Location is required")
-    @NotNull(message = "Location is required")
+//    @NotBlank(message = "Location is required")
+//    @NotNull(message = "Location is required")
     private String location;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Please enter a valid email address")
     private String email;
 
-    @AssertTrue(message = "Must be 'True'")
+//    @AssertTrue(message = "Must be 'True'")
     private boolean mustRegister;
 
-    @Min(value = 1, message = "Number of attendees must be more than zero")
+//    @Min(value = 1, message = "Number of attendees must be more than zero")
     private int numOfAttendees;
 
-    @NotNull(message = "Date is required")
-    @FutureOrPresent(message = "Date cannot be in the past")
+//    @NotNull(message = "Date is required")
+//    @FutureOrPresent(message = "Date cannot be in the past")
     private LocalDate date;
 
     private String color = "#8024db";
+
 
     private EventType type;
 

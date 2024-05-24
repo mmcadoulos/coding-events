@@ -36,6 +36,7 @@ public class EventController {
                                          Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
+            model.addAttribute("types", EventType.values());
             return "events/create";
         } else {
             EventData.addEvent(newEvent);
@@ -74,11 +75,12 @@ public class EventController {
         model.addAttribute("event", eventToEdit);
         String title = "Edit Event: " + eventToEdit.getName() + " (id=" + eventToEdit.getId() + ")";
         model.addAttribute("title", title);
+        model.addAttribute("types", EventType.values());
         return "events/edit";
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String info, String email) {
+    public String processEditForm(int eventId, String name, String info, String email, EventType type) {
         Event eventToEdit = EventData.getById(eventId);
         if (!eventToEdit.getName().equals(name) && !name.isBlank()) {
             eventToEdit.setName(name);
@@ -89,6 +91,7 @@ public class EventController {
         if (!email.isBlank()) {
             eventToEdit.setEmail(email);
         }
+        eventToEdit.setType(type);
         return "redirect:/events";
     }
 
