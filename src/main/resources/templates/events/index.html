@@ -9,7 +9,8 @@
         <th>No events to display! Add an event through this <a href="events/create">form</a></th>
     </tr>
     <tr th:if="${deletedEvents} and ${deletedEvents.size()}">
-        <th th:text="${deletedEvents.size() + ' Deleted events may be restored'}"></th>
+        <th ><span th:text="${deletedEvents.size() + ' Deleted events may be restored '}"></span><a href="events/restore">here</a></th>
+<!--        <th><a href="events/restore">here</a></th>-->
     </tr>
     <tr th:if="${events} and ${events.size()}">
 

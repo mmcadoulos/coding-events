@@ -13,14 +13,15 @@
     </tr>
     <tr th:if="${events} and ${events.size()}">
         <th>Restore?</th>
-        <th>Date</th>
+<!--        <th>Date</th>-->
         <th>Name</th>
         <th>Description</th>
-        <th>Location</th>
+<!--        <th>Location</th>-->
+        <th>Event Type</th>
         <th>Contact Email</th>
-        <th>Registration Required</th>
-        <th>Number of Attendees</th>
-        <th>Color for Outfits</th>
+<!--        <th>Registration Required</th>-->
+<!--        <th>Number of Attendees</th>-->
+<!--        <th>Color for Outfits</th>-->
         <th>Event ID</th>
     </tr>
     </thead>
@@ -32,14 +33,15 @@
                 <input type="submit" value="Restore" class="btn btn-success">
             </form>
         </td>
-        <td th:text="${event.date}">Event Date</td>
+<!--        <td th:text="${event.date}">Event Date</td>-->
         <td th:text="${event.name}">Event name</td>
         <td th:text="${event.info}">Event description</td>
-        <td th:text="${event.location}">Event location</td>
+<!--        <td th:text="${event.location}">Event location</td>-->
+        <td th:text="${event.type}">Event Type</td>
         <td th:text="${event.email}">Contact email</td>
-        <td th:text="${event.mustRegister}">Must Register</td>
-        <td th:text="${event.numOfAttendees}">Number of Attendees</td>
-        <td th:style="${'background-color: ' + event.color + ';'}"></td>
+<!--        <td th:text="${event.mustRegister}">Must Register</td>-->
+<!--        <td th:text="${event.numOfAttendees}">Number of Attendees</td>-->
+<!--        <td th:style="${'background-color: ' + event.color + ';'}"></td>-->
         <td th:text="${event.id}">Event ID</td>
     </tr>
 </table>
