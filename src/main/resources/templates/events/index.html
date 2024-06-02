@@ -9,35 +9,38 @@
         <th>No events to display! Add an event through this <a href="events/create">form</a></th>
     </tr>
     <tr th:if="${deletedEvents} and ${deletedEvents.size()}">
-        <th ><span th:text="${deletedEvents.size() + ' Deleted events may be restored '}"></span><a href="events/restore">here</a></th>
-<!--        <th><a href="events/restore">here</a></th>-->
+        <th><span th:text="${deletedEvents.size() + ' Deleted events may be restored '}"></span><a
+                href="events/restore">here</a></th>
+        <!--        <th><a href="events/restore">here</a></th>-->
     </tr>
     <tr th:if="${events} and ${events.size()}">
 
-<!--        <th>Date</th>-->
+        <!--        <th>Date</th>-->
         <th>Name</th>
         <th>Description</th>
-<!--        <th>Location</th>-->
-        <th>Event Type</th>
+        <!--        <th>Location</th>-->
+        <!--        <th>Event Type</th>-->
         <th>Contact Email</th>
-<!--        <th>Registration Required</th>-->
-<!--        <th>Number of Attendees</th>-->
+        <th>Category</th>
+        <!--        <th>Registration Required</th>-->
+        <!--        <th>Number of Attendees</th>-->
         <th></th>
         <th></th>
-<!--        <th>Color for Outfits</th>-->
+        <!--        <th>Color for Outfits</th>-->
         <th>Event ID</th>
     </tr>
     </thead>
 
     <tr th:each="event : ${events}">
-<!--        <td th:text="${event.date}">Event Date</td>-->
+        <!--        <td th:text="${event.date}">Event Date</td>-->
         <td th:text="${event.name}">Event name</td>
         <td th:text="${event.info}">Event description</td>
-<!--        <td th:text="${event.location}">Event location</td>-->
-        <td th:text="${event.type.displayName}">Event Type</td>
+        <!--        <td th:text="${event.location}">Event location</td>-->
+        <!--        <td th:text="${event.type.displayName}">Event Type</td>-->
         <td th:text="${event.email}">Contact email</td>
-<!--        <td th:text="${event.mustRegister}">Must Register</td>-->
-<!--        <td th:text="${event.numOfAttendees}">Number of Attendees</td>-->
+        <td th:text="${event.eventCategory}">Category</td>
+        <!--        <td th:text="${event.mustRegister}">Must Register</td>-->
+        <!--        <td th:text="${event.numOfAttendees}">Number of Attendees</td>-->
         <td>
             <form method="get" th:action="@{/events/edit/{id}(id=${event.id})}">
                 <input type="hidden" th:value="${event.id}" name="eventId">
@@ -50,7 +53,7 @@
                 <input type="submit" value="Delete" class="btn btn-danger">
             </form>
         </td>
-<!--        <td th:style="${'background-color: ' + event.color + ';'}"></td>-->
+        <!--        <td th:style="${'background-color: ' + event.color + ';'}"></td>-->
         <td th:text="${event.id}">Event ID</td>
     </tr>
 </table>

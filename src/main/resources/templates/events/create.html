@@ -20,20 +20,20 @@
         <p class="error" th:errors="${event.info}"></p>
     </div>
 
-<!--    <div class="form-group">-->
-<!--        <label>Event Location-->
-<!--            <input th:field="${event.location}" class="form-control">-->
-<!--        </label>-->
-<!--        <p class="error" th:errors="${event.location}"></p>-->
-<!--    </div>-->
+    <!--    <div class="form-group">-->
+    <!--        <label>Event Location-->
+    <!--            <input th:field="${event.location}" class="form-control">-->
+    <!--        </label>-->
+    <!--        <p class="error" th:errors="${event.location}"></p>-->
+    <!--    </div>-->
 
-    <div class="form-group">
-        <label>Event Type
-            <select th:field="${event.type}">
-                <option th:each="type : ${types}" th:value="${type}" th:text="${type.displayName}"></option>
-            </select>
-        </label>
-    </div>
+    <!--    <div class="form-group">-->
+    <!--        <label>Event Type-->
+    <!--            <select th:field="${event.type}">-->
+    <!--                <option th:each="type : ${types}" th:value="${type}" th:text="${type.displayName}"></option>-->
+    <!--            </select>-->
+    <!--        </label>-->
+    <!--    </div>-->
 
     <div class="form-group">
         <label>Contact Email
@@ -42,35 +42,47 @@
         <p class="error" th:errors="${event.email}"></p>
     </div>
 
-
-<!--    <div class="form-group">-->
-<!--        <label>Number of Attendees-->
-<!--            <input type="number" th:field="${event.numOfAttendees}" class="form-control">-->
-<!--        </label>-->
-<!--        <p class="error" th:errors="${event.numOfAttendees}"></p>-->
-<!--    </div>-->
-
-<!--    <div class="form-group">-->
-<!--        <label>Attendees Must Register to Attend-->
-<!--            <input type="checkbox" th:field="${event.mustRegister}" class="form-check-input">-->
-<!--        </label>-->
-<!--        <p class="error" th:errors="${event.mustRegister}"></p>-->
-<!--    </div>-->
+    <div class="form-group">
+        <label>Event Category
+            <select th:field="${event.eventCategory}">
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.name}">
+                </option>
+            </select>
+        </label>
+        <p class="error" th:errors="${event.eventCategory}"></p>
+    </div>
 
 
-<!--    <div class="form-group">-->
-<!--        <label>Event Date-->
-<!--            <input type="date" th:field="${event.date}" class="form-control">-->
-<!--        </label>-->
-<!--        <p class="error" th:errors="${event.date}"></p>-->
-<!--    </div>-->
+    <!--    <div class="form-group">-->
+    <!--        <label>Number of Attendees-->
+    <!--            <input type="number" th:field="${event.numOfAttendees}" class="form-control">-->
+    <!--        </label>-->
+    <!--        <p class="error" th:errors="${event.numOfAttendees}"></p>-->
+    <!--    </div>-->
 
-<!--    <div class="form-group">-->
-<!--        <label>Primary Color for Outfits-->
-<!--            <input type="color" th:field="${event.color}" class="form-control">-->
-<!--        </label>-->
-<!--        <p class="error" th:errors="${event.color}"></p>-->
-<!--    </div>-->
+    <!--    <div class="form-group">-->
+    <!--        <label>Attendees Must Register to Attend-->
+    <!--            <input type="checkbox" th:field="${event.mustRegister}" class="form-check-input">-->
+    <!--        </label>-->
+    <!--        <p class="error" th:errors="${event.mustRegister}"></p>-->
+    <!--    </div>-->
+
+
+    <!--    <div class="form-group">-->
+    <!--        <label>Event Date-->
+    <!--            <input type="date" th:field="${event.date}" class="form-control">-->
+    <!--        </label>-->
+    <!--        <p class="error" th:errors="${event.date}"></p>-->
+    <!--    </div>-->
+
+    <!--    <div class="form-group">-->
+    <!--        <label>Primary Color for Outfits-->
+    <!--            <input type="color" th:field="${event.color}" class="form-control">-->
+    <!--        </label>-->
+    <!--        <p class="error" th:errors="${event.color}"></p>-->
+    <!--    </div>-->
 
     <br>
 

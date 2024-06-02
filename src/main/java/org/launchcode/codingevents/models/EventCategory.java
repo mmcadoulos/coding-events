@@ -14,12 +14,20 @@ public class EventCategory extends AbstractEntity {
     public EventCategory() {
     }
 
-    public EventCategory(@Size(min = 3, message = "Name must be at least 3 characters long") String name) {
+    public EventCategory(/*@Size(min = 3, message = "Name must be at least 3 characters long")*/ String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Name: " + name;
+        return name;
     }
 }
