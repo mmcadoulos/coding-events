@@ -17,27 +17,27 @@
 
         <!--        <th>Date</th>-->
         <th>Name</th>
-        <th>Description</th>
+<!--        <th>Description</th>-->
         <!--        <th>Location</th>-->
         <!--        <th>Event Type</th>-->
-        <th>Contact Email</th>
+<!--        <th>Contact Email</th>-->
         <th>Category</th>
         <!--        <th>Registration Required</th>-->
         <!--        <th>Number of Attendees</th>-->
         <th></th>
         <th></th>
         <!--        <th>Color for Outfits</th>-->
-        <th>Event ID</th>
+<!--        <th>Event ID</th>-->
     </tr>
     </thead>
 
     <tr th:each="event : ${events}">
         <!--        <td th:text="${event.date}">Event Date</td>-->
         <td><a th:href="'/events/detail?eventId=' + ${event.id}" th:text="${event.name}">Event name</a></td>
-        <td th:text="${event.eventDetails.info}">Event description</td>
+<!--        <td th:text="${event.eventDetails.info}">Event description</td>-->
         <!--        <td th:text="${event.location}">Event location</td>-->
         <!--        <td th:text="${event.type.displayName}">Event Type</td>-->
-        <td th:text="${event.eventDetails.email}">Contact email</td>
+<!--        <td th:text="${event.eventDetails.email}">Contact email</td>-->
         <td th:text="${event.eventCategory}">Category</td>
         <!--        <td th:text="${event.mustRegister}">Must Register</td>-->
         <!--        <td th:text="${event.numOfAttendees}">Number of Attendees</td>-->
@@ -54,7 +54,7 @@
             </form>
         </td>
         <!--        <td th:style="${'background-color: ' + event.color + ';'}"></td>-->
-        <td th:text="${event.id}">Event ID</td>
+<!--        <td th:text="${event.id}">Event ID</td>-->
     </tr>
 </table>
 </body>
