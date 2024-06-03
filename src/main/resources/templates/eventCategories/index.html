@@ -22,7 +22,7 @@
     </thead>
 
     <tr th:each="category : ${categories}">
-        <td th:text="${category.name}">Event name</td>
+        <td><a th:text="${category.name}" th:href="'/events?categoryId=' + ${category.id}">Event name</a></td>
 <!--        <td>-->
 <!--            <form method="get" th:action="@{/eventCategories/edit/{id}(id=${category.id})}">-->
 <!--                <input type="hidden" th:value="${category.id}" name="categoryId">-->
