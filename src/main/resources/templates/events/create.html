@@ -15,9 +15,9 @@
 
     <div class="form-group">
         <label>Event Description
-            <input th:field="${event.info}" class="form-control">
+            <input th:field="${event.eventDetails.info}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.info}"></p>
+        <p class="error" th:errors="${event.eventDetails.info}"></p>
     </div>
 
     <!--    <div class="form-group">-->
@@ -37,9 +37,9 @@
 
     <div class="form-group">
         <label>Contact Email
-            <input th:field="${event.email}" class="form-control">
+            <input th:field="${event.eventDetails.email}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.email}"></p>
+        <p class="error" th:errors="${event.eventDetails.email}"></p>
     </div>
 
     <div class="form-group">

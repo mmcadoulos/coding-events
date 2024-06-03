@@ -34,10 +34,10 @@
     <tr th:each="event : ${events}">
         <!--        <td th:text="${event.date}">Event Date</td>-->
         <td th:text="${event.name}">Event name</td>
-        <td th:text="${event.info}">Event description</td>
+        <td th:text="${event.eventDetails.info}">Event description</td>
         <!--        <td th:text="${event.location}">Event location</td>-->
         <!--        <td th:text="${event.type.displayName}">Event Type</td>-->
-        <td th:text="${event.email}">Contact email</td>
+        <td th:text="${event.eventDetails.email}">Contact email</td>
         <td th:text="${event.eventCategory}">Category</td>
         <!--        <td th:text="${event.mustRegister}">Must Register</td>-->
         <!--        <td th:text="${event.numOfAttendees}">Number of Attendees</td>-->
