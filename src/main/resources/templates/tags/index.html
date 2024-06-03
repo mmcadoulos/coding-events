@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}"></head>
+<body class="container">
+<nav th:replace="~{fragments :: navBar}"></nav>
+<table class="table table-striped">
+    <thead>
+    <tr th:unless="${tags} and ${tags.size()}">
+        <th>No tags to display! Add a tags through this <a href="tags/create">form</a></th>
+    </tr>
+<!--    <tr th:if="${deletedEvents} and ${deletedEvents.size()}">-->
+<!--        <th ><span th:text="${deletedEvents.size() + ' Deleted events may be restored '}"></span><a href="eventCategories/restore">here</a></th>-->
+    </tr>
+    <tr th:if="${tags} and ${tags.size()}">
+
+        <th>Name</th>
+<!--        <th></th>-->
+        <th></th>
+        <th>ID</th>
+
+    </tr>
+    </thead>
+
+    <tr th:each="tag : ${tags}">
+        <td><a th:text="${tag.name}">Tag name</a></td>
+<!--   Delete Tag Button     -->
+        <td>
+            <form method="post" th:action="@{/tags/deleteTag}">
+                <input type="hidden" th:value="${tag.id}" name="tagId">
+                <input type="submit" value="Delete" class="btn btn-danger">
+            </form>
+        </td>
+        <td th:text="${tag.id}">Tag ID</td>
+    </tr>
+</table>
+</body>
+</html>

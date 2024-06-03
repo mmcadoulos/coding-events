@@ -33,7 +33,7 @@
 
     <tr th:each="event : ${events}">
         <!--        <td th:text="${event.date}">Event Date</td>-->
-        <td th:text="${event.name}">Event name</td>
+        <td><a th:href="'/events/detail?eventId=' + ${event.id}" th:text="${event.name}">Event name</a></td>
         <td th:text="${event.eventDetails.info}">Event description</td>
         <!--        <td th:text="${event.location}">Event location</td>-->
         <!--        <td th:text="${event.type.displayName}">Event Type</td>-->
