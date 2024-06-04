@@ -2,7 +2,6 @@ package org.launchcode.codingevents.controllers;
 
 import jakarta.validation.Valid;
 import org.launchcode.codingevents.data.TagRepository;
-import org.launchcode.codingevents.models.EventCategory;
 import org.launchcode.codingevents.models.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

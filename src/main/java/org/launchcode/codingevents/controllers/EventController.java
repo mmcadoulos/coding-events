@@ -1,13 +1,14 @@
 package org.launchcode.codingevents.controllers;
 
 import jakarta.validation.Valid;
-import org.hibernate.validator.internal.util.ConcurrentReferenceHashMap;
 import org.launchcode.codingevents.data.DeletedData;
 import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
+import org.launchcode.codingevents.data.TagRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventCategory;
-import org.launchcode.codingevents.models.EventDetails;
+import org.launchcode.codingevents.models.Tag;
+import org.launchcode.codingevents.models.dto.EventTagDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,21 +27,25 @@ public class EventController {
     @Autowired
     private EventCategoryRepository eventCategoryRepository;
 
+    @Autowired
+    private TagRepository tagRepository;
+
+
     @GetMapping()
     public String displayEvents(@RequestParam(required = false) Integer categoryId, Model model) {
-        if(categoryId == null){
+        if (categoryId == null) {
             model.addAttribute("title", "All Events");
             model.addAttribute("events", eventRepository.findAll());
             model.addAttribute("deletedEvents", DeletedData.getAll());
         } else {
-           Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
-           if (result.isEmpty()){
-               model.addAttribute("title", "Invalid category ID: " + categoryId);
-           } else {
-               EventCategory category = result.get();
-               model.addAttribute("title", "Events with the " + category.getName() + " category");
-               model.addAttribute("events", category.getEventList());
-           }
+            Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid category ID: " + categoryId);
+            } else {
+                EventCategory category = result.get();
+                model.addAttribute("title", "Events with the " + category.getName() + " category");
+                model.addAttribute("events", category.getEventList());
+            }
         }
         return "events/index";
     }
@@ -67,6 +72,53 @@ public class EventController {
             return "redirect:/events";
         }
     }
+
+    @GetMapping("detail")
+    public String displayEventDetails(@RequestParam Integer eventId, Model model) {
+
+        Optional<Event> result = eventRepository.findById(eventId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Event ID: " + eventId);
+        } else {
+            Event event = result.get();
+            model.addAttribute("title", event.getName() + " Details");
+            model.addAttribute("event", event);
+            model.addAttribute("tags", event.getTags());
+        }
+
+        return "events/detail";
+    }
+
+    @GetMapping("add-tag")
+    public String displayAddTagForm(@RequestParam Integer eventId, Model model) {
+        Optional<Event> result = eventRepository.findById(eventId);
+        Event event = result.get();
+        model.addAttribute("title", "Add Tag to: " + event.getName());
+        model.addAttribute("tags", tagRepository.findAll());
+        EventTagDTO eventTag = new EventTagDTO();
+        eventTag.setEvent(event);
+        model.addAttribute("eventTag", eventTag);
+        return "events/add-tag";
+    }
+
+    @PostMapping("add-tag")
+    public String processAddTagForm(@ModelAttribute @Valid EventTagDTO eventTag,
+                                    Errors errors,
+                                    Model model) {
+        if (!errors.hasErrors()) {
+            Event event = eventTag.getEvent();
+            Tag tag = eventTag.getTag();
+            if (!event.getTags().contains(tag)) {
+                event.addTag(tag);
+                eventRepository.save(event);
+            }
+            return "redirect:/events/detail?eventId=" + event.getId();
+        }
+        return "redirect:/events/add-tag";
+    }
+
+    /* ******My views****** */
 
     @GetMapping("delete")
     public String displayDeleteEventForm(Model model) {
@@ -95,23 +147,10 @@ public class EventController {
     }
 
     @GetMapping("edit/{eventId}")
-    public String processEditButtonInProgress () {return "redirect:/events";}
-
-    @GetMapping("detail")
-    public String displayEventDetails(@RequestParam Integer eventId, Model model) {
-
-        Optional<Event> result = eventRepository.findById(eventId);
-
-        if (result.isEmpty()) {
-            model.addAttribute("title", "Invalid Event ID: " + eventId);
-        } else {
-            Event event = result.get();
-            model.addAttribute("title", event.getName() + " Details");
-            model.addAttribute("event", event);
-        }
-
-        return "events/detail";
+    public String processEditButtonInProgress() {
+        return "redirect:/events";
     }
+
 
 //    @GetMapping("edit/{eventId}")
 //    public String displayEditForm(Model model, @PathVariable int eventId) {
@@ -122,7 +161,7 @@ public class EventController {
 //        model.addAttribute("types", EventType.values());
 //        return "events/edit";
 //    }
-//
+
 //    @PostMapping("edit")
 //    public String processEditForm(int eventId, String name, String info, String email, EventType type) {
 //        Event eventToEdit = EventData.getById(eventId);
@@ -138,14 +177,14 @@ public class EventController {
 //        eventToEdit.setType(type);
 //        return "redirect:/events";
 //    }
-//
+
 //    @GetMapping("restore")
 //    public String displayRestoreForm(Model model) {
 //        model.addAttribute("title", "Deleted Events");
 //        model.addAttribute("events", DeletedData.getAll());
 //        return "events/restore";
 //    }
-//
+
 //    @PostMapping("restore")
 //    public String processRestoreEvent(@RequestParam int eventId){
 //        EventData.addEvent(DeletedData.getById(eventId));

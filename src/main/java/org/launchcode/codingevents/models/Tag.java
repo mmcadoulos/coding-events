@@ -25,6 +25,8 @@ public class Tag extends AbstractEntity {
         this.name = name;
     }
 
+//    public String getDisplayName(){return "#" + name + " ";}
+
     public String getName() {
         return name;
     }
@@ -39,6 +41,6 @@ public class Tag extends AbstractEntity {
 
     @Override
     public String toString() {
-        return name;
+        return "#" + name + " ";
     }
 }
