@@ -4,7 +4,7 @@
 <body class="container">
 <nav th:replace="~{fragments :: navBar}"></nav>
 
-<form method="post">
+<form th:if="${eventIdIsValid}" method="post">
     <div class="form-group">
         <input type="hidden" th:field="${eventTag.event}">
         <select th:field="${eventTag.tag}">

@@ -93,12 +93,18 @@ public class EventController {
     @GetMapping("add-tag")
     public String displayAddTagForm(@RequestParam Integer eventId, Model model) {
         Optional<Event> result = eventRepository.findById(eventId);
-        Event event = result.get();
-        model.addAttribute("title", "Add Tag to: " + event.getName());
-        model.addAttribute("tags", tagRepository.findAll());
-        EventTagDTO eventTag = new EventTagDTO();
-        eventTag.setEvent(event);
-        model.addAttribute("eventTag", eventTag);
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Event ID: " + eventId);
+            model.addAttribute("eventIdIsValid", false);
+        } else {
+            Event event = result.get();
+            model.addAttribute("title", "Add Tag to: " + event.getName());
+            model.addAttribute("tags", tagRepository.findAll());
+            EventTagDTO eventTag = new EventTagDTO();
+            eventTag.setEvent(event);
+            model.addAttribute("eventTag", eventTag);
+            model.addAttribute("eventIdIsValid", true);
+        }
         return "events/add-tag";
     }
 
